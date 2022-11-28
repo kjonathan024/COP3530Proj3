@@ -6,46 +6,47 @@
 using namespace std;
 
 class HashSet {
-	private:
-	int size, CAPACITY;
+private:
+    int size, CAPACITY;
 	double load_factor; // if size >= LF * CAPACITY we will double CAPACITY
-	vector<list<int>> table; // use of list nested in vector allows for separate chaining to resolve conflicts
+	vector<list<Athlete>> set; // use of list nested in vector allows for separate chaining to resolve conflicts
 
-	int hash(int key) {
-		return key % CAPACITY; // hash function we're using is very simple
+	int hash(Athlete& ath) {
+		return stoi(ath.getID()) % CAPACITY; // hash function bases off modulo of unique ID of athletes by CAPACITY (pretty simple)
 	}
 
-	list<int>::iterator search(int key) {
-		int h = hash(key);
-		return find(table[h].begin(), table[h].end(), key);
+	list<Athlete>::iterator search(Athlete& ath) { // returns iterator to the location of the Athlete (if it exists)
+		int h = hash(ath);
+		return find(set[h].begin(), set[h].end(), ath);
 	}
 
 	void rehash() {
 	  size = 0;
 		CAPACITY = max(2, CAPACITY); // make sure CAPACITY is at minimum 2 in any case
-		vector<list<int>> old_table(move(table)); // change!
-		table = vector<list<int>>(CAPACITY);
+		vector<list<Athlete>> prev_set(move(set)); // using 
+		set = vector<list<Athlete>>(CAPACITY);
 		
-		for (list<int>& chain: old_table)
-			for (int& key: chain)
-				add(key);
+		for (list<Athlete>& chain: prev_set) {
+            for (Athlete& ath: chain)
+				add(ath);
+        }	
 	}
 
 public:
 	HashSet() {
 		size = 0;
 		CAPACITY = 2;
-		load_factor = 0.75;
-		table.resize(CAPACITY);
+		load_factor = 0.7;
+		set.resize(CAPACITY);
 	}
 	
-	void add(int key) {
-		if (contains(key))
+	void add(Athlete ath) {
+		if (contains(ath))
 			return;
 		
 		size++;
-		int h = hash(key);
-		table[h].push_back(key);
+		int h = hash(ath);
+		set[h].push_back(ath);
 		
 		if (size >= load_factor * CAPACITY) {
 			CAPACITY *= 2;
@@ -53,24 +54,24 @@ public:
 		}
 	}
 	
-	void remove(int key) {
-		int h = hash(key);
-		auto it = search(key);
+	void remove(Athlete ath) { // double check logic if this actually makes sense to do
+		int h = hash(ath);
+		auto iter = search(ath);
 		
-		if (it == table[h].end())
+		if (iter == set[h].end()) // not in set!
 			return;
 		
 		size--;
-		table[h].erase(it);
+		set[h].erase(iter);
 		
-		if (size <= 0.5 * load_factor * CAPACITY) {
+		if (size <= 0.5 * load_factor * CAPACITY) { // check if we can reduce the CAPACITY of the hashset (to reduce used space)
 			CAPACITY /= 2;
 			rehash();
 		}
 	}
 	
-	bool contains(int key) {
-		int h = hash(key);
-		return search(key) != table[h].end();
+	bool contains(Athlete ath) {
+		int h = hash(ath);
+		return search(ath) != set[h].end();
 	}
 };
