@@ -15,6 +15,7 @@ class Athlete { // shell Athlete class
         
     public:
         // constructor
+        Athlete() {id = "1";}
         Athlete(string& id, string& playerName, string& sex, int& age, int& height, int& weight, string& sport, string& event, string& medalType) {
             this->id = id;
             this->playerName = playerName;

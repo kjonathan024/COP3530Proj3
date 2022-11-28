@@ -1,8 +1,11 @@
 // testing if Jonathan repo works
 #include <iostream>
 #include "HashSet.h"
-#include "Athlete.h"
 
 int main() {
-  std::cout << "Hello World!\n";
+    HashSet set;
+    Athlete a;
+    Athlete b;
+    set.add(a);
+    set.add(b);
 }
