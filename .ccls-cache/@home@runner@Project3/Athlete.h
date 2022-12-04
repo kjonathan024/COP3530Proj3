@@ -7,8 +7,8 @@ class Athlete { // shell Athlete class
         string playerName;
         string sex;
         int age;
-        int height;
-        int weight;
+        int height; //in centimeters
+        int weight; //in kilograms
         string sport;
         string event;
         string medalType;

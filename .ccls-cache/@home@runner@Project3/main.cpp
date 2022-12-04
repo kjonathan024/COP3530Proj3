@@ -1,6 +1,7 @@
 // testing if Jonathan repo works
 #include <iostream>
 #include "HashSet.h"
+#include "BnRTree.h""
 
 int main() {
     HashSet set;
