@@ -1,6 +1,12 @@
-// test if github repo working
+// testing if Jonathan repo works
 #include <iostream>
+#include "HashSet.h"
+#include "BnRTree.h"
 
 int main() {
-  std::cout << "Hello World!\n";
+    HashSet set;
+    Athlete a;
+    Athlete b;
+    set.add(a);
+    set.add(b);
 }
