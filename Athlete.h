@@ -1,3 +1,4 @@
+#pragma once
 #include <string>
 using namespace std;
 
@@ -16,7 +17,7 @@ class Athlete { // shell Athlete class
     public:
         // constructor
         Athlete() {id = "1";}
-        Athlete(string& id, string& playerName, string& sex, int& age, int& height, int& weight, string& sport, string& event, string& medalType) {
+        Athlete(string id, string playerName, string sex, int age, int height, int weight, string sport, string event, string medalType) {
             this->id = id;
             this->playerName = playerName;
             this->sex = sex;
@@ -35,9 +36,13 @@ class Athlete { // shell Athlete class
         string getSport() { return sport; }
         string getEvent() { return event; }
         string getMedalType() { return medalType; }
-        int getage() { return age; }
+        int getAge() { return age; }
         int getHeight() { return height; }
         int getWeight() { return weight; }
+
+        bool operator== (Athlete& ath2) {
+    return (this->id == ath2.id);
+        }
 
         
 };

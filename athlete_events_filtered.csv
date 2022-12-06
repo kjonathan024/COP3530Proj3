@@ -120,7 +120,6 @@ ID,Name,Sex,Age,Height,Weight,Sport,Event,Medal
 1561,Mobolade Abimbola Ajomale,M,20,180,62,Athletics,Athletics Men's 4 x 100 metres Relay,Bronze
 1574,Kosei Akaishi,M,19,172,74,Wrestling,"Wrestling Men's Featherweight, Freestyle",Silver
 1581,Yuichi Akasaka,M,24,169,64,Short Track Speed Skating,"Short Track Speed Skating Men's 5,000 metres Relay",Bronze
-1595,Hseyin Akba,M,NA,167,57,Wrestling,"Wrestling Men's Flyweight, Freestyle",Bronze
 1622,Michelle Anne Akers,F,30,178,68,Football,Football Women's Football,Gold
 1637,Yelena Rabigovna Akhaminova (-Sokolovskaya),F,18,181,80,Volleyball,Volleyball Women's Volleyball,Gold
 1647,Murodzhon Kakharovich Akhmadaliyev,M,21,165,56,Boxing,Boxing Men's Bantamweight,Bronze
@@ -505,7 +504,6 @@ ID,Name,Sex,Age,Height,Weight,Sport,Event,Medal
 6278,Sarah Lianne Ayton (-Dempsey),F,24,167,63,Sailing,Sailing Women's Three Person Keelboat,Gold
 6287,Khurshid Azam,M,22,171,67,Hockey,Hockey Men's Hockey,Silver
 6305,Filiberto Azcuy Aguilera,M,23,177,74,Wrestling,"Wrestling Men's Welterweight, Greco-Roman",Gold
-6327,Abdul Wahid Aziz,M,NA,174,67,Weightlifting,Weightlifting Men's Lightweight,Bronze
 6332,Tariq Aziz,M,26,178,71,Hockey,Hockey Men's Hockey,Silver
 6338,Minneula Zinyatovich Azizov,M,29,171,73,Hockey,Hockey Men's Hockey,Bronze
 6352,Okechukwu Godson Azubuike,M,19,170,68,Football,Football Men's Football,Bronze
@@ -2138,7 +2136,6 @@ ID,Name,Sex,Age,Height,Weight,Sport,Event,Medal
 23820,Sebastian Eduardo Crismanich,M,25,183,79,Taekwondo,Taekwondo Men's Welterweight,Gold
 23826,Ernesto Rubn Cristaldo Santa Cruz,M,20,180,75,Football,Football Men's Football,Silver
 23834,Cristiane Rozeira de Souza Silva,F,19,176,69,Football,Football Women's Football,Silver
-23853,Giuseppe Crivelli,M,NA,172,71,Rowing,Rowing Men's Coxed Eights,Bronze
 23872,Rita Louise Crockett (-Buck),F,26,174,64,Volleyball,Volleyball Women's Volleyball,Silver
 23884,Dirk Crois,M,23,184,87,Rowing,Rowing Men's Double Sculls,Silver
 23887,Robin Croker,M,22,174,64,Cycling,"Cycling Men's Team Pursuit, 4,000 metres",Bronze
@@ -4570,7 +4567,6 @@ ID,Name,Sex,Age,Height,Weight,Sport,Event,Medal
 49421,Martin Hollstein,M,21,192,90,Canoeing,"Canoeing Men's Kayak Doubles, 1,000 metres",Gold
 49422,Martin Hllwarth,M,17,182,65,Ski Jumping,"Ski Jumping Men's Normal Hill, Individual",Silver
 49431,Dorthe Elisabeth Holm,F,25,169,65,Curling,Curling Women's Curling,Silver
-49454,"Frederick ""Fred"" Holman",M,NA,178,71,Swimming,Swimming Men's 200 metres Breaststroke,Gold
 49478,Ulrike Holmer (-Lederer),F,16,154,50,Shooting,"Shooting Women's Small-Bore Rifle, Three Positions, 50 metres",Silver
 49480,Per Anders Gustaf Holmertz,M,20,185,75,Swimming,Swimming Men's 100 metres Freestyle,Silver
 49482,"Andrew John ""Andy"" Holmes",M,24,192,95,Rowing,Rowing Men's Coxed Fours,Gold
@@ -7574,7 +7570,6 @@ ID,Name,Sex,Age,Height,Weight,Sport,Event,Medal
 77712,"Cameron ""Maxi"" McKenzie-McHarg",M,28,196,98,Rowing,Rowing Men's Coxless Fours,Silver
 77716,Emma McKeon,F,22,180,60,Swimming,Swimming Women's 200 metres Freestyle,Bronze
 77722,"William Alister M. ""Bill"" McKerlich",M,19,193,89,Rowing,Rowing Men's Coxed Eights,Silver
-77729,William McKie,M,NA,170,60,Wrestling,"Wrestling Men's Featherweight, Freestyle",Bronze
 77735,"Patricia Jean ""Pat"" McKillop (Fraser-, -Williams)",F,24,160,55,Hockey,Hockey Women's Hockey,Gold
 77739,"Arthur Frank ""Art"" McKinlay",M,24,186,79,Rowing,Rowing Men's Coxless Fours,Silver
 77740,John Dickinson McKinlay,M,24,186,82,Rowing,Rowing Men's Coxless Fours,Silver
@@ -8925,7 +8920,6 @@ ID,Name,Sex,Age,Height,Weight,Sport,Event,Medal
 91618,Park Sun-Ja,F,22,163,54,Hockey,Hockey Women's Hockey,Silver
 91626,Park Yeong-Cheol,M,22,175,80,Judo,Judo Men's Middleweight,Bronze
 91649,Candace Nicole Parker (-Williams),F,22,193,80,Basketball,Basketball Women's Basketball,Gold
-91655,George Richard Parker,M,NA,183,81,Athletics,"Athletics Men's 3,000 metres Walk",Silver
 91660,"Roger ""Jack"" Parker",M,20,187,84,Athletics,Athletics Men's Decathlon,Bronze
 91664,Jason Parker,M,30,185,81,Speed Skating,Speed Skating Men's Team Pursuit (8 laps),Silver
 91671,Kelly Parker,F,31,156,53,Football,Football Women's Football,Bronze
@@ -9420,7 +9414,6 @@ ID,Name,Sex,Age,Height,Weight,Sport,Event,Medal
 96876,Bojan Preern,M,26,191,93,Rowing,Rowing Men's Coxless Pairs,Bronze
 96880,Irina Natanovna Press,F,21,168,75,Athletics,Athletics Women's 80 metres Hurdles,Gold
 96881,Tamara Natanovna Press,F,23,180,102,Athletics,Athletics Women's Shot Put,Gold
-96882,William J. Press,M,NA,161,53,Wrestling,"Wrestling Men's Bantamweight, Freestyle",Silver
 96902,Donald Wayne Pretty,M,20,192,87,Rowing,Rowing Men's Coxed Eights,Silver
 96928,Miroslav Pribani,M,26,186,77,Handball,Handball Men's Handball,Gold
 96936,Carey Price,M,26,191,100,Ice Hockey,Ice Hockey Men's Ice Hockey,Gold
@@ -12972,7 +12965,6 @@ ID,Name,Sex,Age,Height,Weight,Sport,Event,Medal
 131044,Martin Winter,M,24,194,91,Rowing,Rowing Men's Quadruple Sculls,Gold
 131048,"Anthony William ""Nick"" Winter",M,29,181,74,Athletics,Athletics Men's Triple Jump,Gold
 131050,Olaf Winter,M,23,189,88,Canoeing,"Canoeing Men's Kayak Fours, 1,000 metres",Gold
-131064,"Frederick ""Fred"" Winters",M,NA,176,105,Weightlifting,Weightlifting Men's All-Around Dumbbell Contest,Silver
 131067,"Frank Thomas ""Tom"" Winters, III",M,20,178,70,Swimming,Swimming Men's 4 x 200 metres Freestyle Relay,Gold
 131072,Kasper Winther Jrgensen,M,27,182,73,Rowing,Rowing Men's Lightweight Coxless Fours,Bronze
 131077,Ardy Bernardus Wiranata,M,22,171,67,Badminton,Badminton Men's Singles,Silver
@@ -13506,6 +13498,14 @@ ID,Name,Sex,Age,Height,Weight,Sport,Event,Medal
 135420,Jaime Zumalacrregui Bentez,M,23,176,70,Hockey,Hockey Men's Hockey,Silver
 135486,Viktor Valeryevich Zuyev,M,21,188,91,Boxing,Boxing Men's Heavyweight,Silver
 135488,Nataliya Vladimirovna Zuyeva,F,19,176,62,Rhythmic Gymnastics,Rhythmic Gymnastics Women's Group,Gold
+135491,Marijan uej,M,22,186,93,Water Polo,Water Polo Men's Water Polo,Silver
+135503,Zurab Zviadauri,M,23,182,90,Judo,Judo Men's Middleweight,Gold
+135504,Viktor Oleksandrovych Zviahintsev,M,25,178,79,Football,Football Men's Football,Bronze
+135508,Vera Igorevna Zvonaryova,F,23,172,59,Tennis,Tennis Women's Singles,Bronze
+135525,Martin Zwicker,M,29,175,64,Hockey,Hockey Men's Hockey,Bronze
+135535,Claudia Antoinette Zwiers,F,22,181,78,Judo,Judo Women's Middleweight,Bronze
+135553,Galina Ivanovna Zybina (-Fyodorova),F,21,168,80,Athletics,Athletics Women's Shot Put,Gold
+135563,Olesya Nikolayevna Zykina,F,19,171,64,Athletics,Athletics Women's 4 x 400 metres Relay,Bronze
 135491,Marijan uej,M,22,186,93,Water Polo,Water Polo Men's Water Polo,Silver
 135503,Zurab Zviadauri,M,23,182,90,Judo,Judo Men's Middleweight,Gold
 135504,Viktor Oleksandrovych Zviahintsev,M,25,178,79,Football,Football Men's Football,Bronze
