@@ -19,8 +19,13 @@ sport map that has sport as key and id as value
 */
 void sleeperText(string s = "", int time = 50);
 
+string sportSelect();
+
+void ASCIIDisplay();
 
 Athlete welcomeMessage();
+
+void algoOperation(HashSet &athletes,BnRTree &tree, Athlete &user, unordered_map<string, vector<string>> &sport_to_id, bool &reRun);
 
 void GetDataTSVFile(string fileP, HashSet &athletes, BnRTree &tree,
                     unordered_map<string, vector<string>> &sport_to_id) {
@@ -85,30 +90,18 @@ int main() {
 /* read in TSV */
   GetDataTSVFile("athlete_events_filtered.tsv", athletes, tree, sport_to_id);
 /* run hashset version of algo and time it */
-chrono::steady_clock::time_point begin = chrono::steady_clock::now();
-  algo(athletes,user,sport_to_id);
-    chrono::steady_clock::time_point end = chrono::steady_clock::now();
+bool reRun = false;
+algoOperation(athletes,tree, user, sport_to_id, reRun);
 
-cout << "Time for hashmap probability calculation: "
-<< chrono::duration_cast<chrono::microseconds>(end - begin).count() << "[μs]" << endl;
-
-        begin = chrono::steady_clock::now();
-        algo(tree,user,sport_to_id);
-        end = chrono::steady_clock::now();
-
-   cout << "Time for Red-Black Tree probability calculation: "
-<< chrono::duration_cast<chrono::microseconds>(end - begin).count() << "[μs]" << endl; 
+while (reRun) {
+    ASCIIDisplay();
+    user.setSport(sportSelect());
+    algoOperation(athletes,tree, user, sport_to_id, reRun);
+}
+    
 }
 
 Athlete welcomeMessage() {
-  /*cout << "------------- ( ^ O ^ ) Welcome to the Olympamatic ( ^ O ^ ) -------------" << endl;
-  std::this_thread::sleep_for(std::chrono::milliseconds(300));
-  cout << "Could you be an olympic athlete with your current physical "
-          "characteristics?"
-       << endl;
-  std::this_thread::sleep_for(std::chrono::milliseconds(300));
-  cout << endl;
-  std::this_thread::sleep_for(std::chrono::milliseconds(300));*/
   sleeperText("   ____  _                                             _   _      ");
   sleeperText("  / __ \\| |                                           | | (_)     ");
   sleeperText(" | |  | | |_   _ _ __ ___  _ __   __ _ _ __ ___   __ _| |_ _  ___ ");
@@ -117,10 +110,12 @@ Athlete welcomeMessage() {
   sleeperText("  \\____/|_|\\__, |_| |_| |_| .__/ \\__,_|_| |_| |_|\\__,_|\\__|_|\\___|");
   sleeperText("            __/ |         | |                                     ");
   sleeperText("           |___/          |_|                                     ");
+
+  sleeperText();
+  ASCIIDisplay();
   sleeperText("Please enter your information as prompted and we shall see if you have what it takes");
-  sleeperText("");
-  sleeperText("");
-  sleeperText("");
+    sleeperText();
+    sleeperText();
     
   string name;
   string gender;
@@ -131,23 +126,38 @@ Athlete welcomeMessage() {
     
   cout << "What is your name?" << endl;
   getline(cin, name);
-    
+  sleeperText("",100);
   cout << "What is your gender? (Enter \"M\" for Male. Enter \"F\" for Female)" << endl;
   getline(cin, gender);
+  sleeperText("",100);
     
   cout << "What is your age?" << endl;
   string temp;
   getline(cin, temp);
   age = stoi(temp);
+  sleeperText("",100);
     
   cout << "What is height? (Enter to the nearest centimeters)" << endl;
   getline(cin, temp);
   height = stoi(temp);
+  sleeperText("",100);
     
   cout << "What is weight (Enter to the nearest kilograms)" << endl;
   getline(cin, temp);
   weight = stoi(temp);
-    
+  sleeperText("",100);
+
+  sport = sportSelect();
+
+  return Athlete("", name, gender, age, height, weight, sport, "", "");
+}
+
+void sleeperText(string s, int time) {
+        cout << s << endl;
+    std::this_thread::sleep_for(std::chrono::milliseconds(time));
+}
+
+string sportSelect() {
   cout << "What sport are you interested in? (Type exactly as seen)";
   cout << endl;
     
@@ -166,12 +176,101 @@ Athlete welcomeMessage() {
   sleeperText("Cross Country Skiing    Judo                Snowboarding                  Wrestling",100);
   sleeperText("Curling                 Lacrosse            Softball     ",100);
   cout << endl;
+  string sport;
   getline(cin, sport);
-
-  return Athlete("", name, gender, age, height, weight, sport, "", "");
+  return sport;
 }
 
-void sleeperText(string s, int time) {
-        cout << s << endl;
-    std::this_thread::sleep_for(std::chrono::milliseconds(time));
+void algoOperation(HashSet &athletes,BnRTree &tree, Athlete &user, unordered_map<string, vector<string>> &sport_to_id, bool &reRun)
+{
+    cout << endl << "Hashmap Implementation of Algorithm: " << endl;
+chrono::steady_clock::time_point begin = chrono::steady_clock::now();
+  algo(athletes,user,sport_to_id);
+    chrono::steady_clock::time_point end = chrono::steady_clock::now();
+    sleeperText(".",300);
+    sleeperText(".",300);
+    sleeperText(".",300);
+    sleeperText("", 300);
+cout << "Time for hashmap probability calculation: "
+<< chrono::duration_cast<chrono::microseconds>(end - begin).count() << "[μs]" << endl;
+sleeperText("",1000);
+
+/* run red-black tree version of algo and time it */
+cout << endl << "Red-Black Tree Implementation of Algorithm: " << endl;
+    
+        begin = chrono::steady_clock::now();
+        algo(tree,user,sport_to_id);
+        end = chrono::steady_clock::now();
+    sleeperText(".",300);
+    sleeperText(".",300);
+    sleeperText(".",300);
+    sleeperText("", 300);
+   cout << "Time for Red-Black Tree probability calculation: "
+<< chrono::duration_cast<chrono::microseconds>(end - begin).count() << "[μs]" << endl;
+    sleeperText("", 300);
+    sleeperText(".",300);
+    sleeperText(".",300);
+    sleeperText(".",300);
+    sleeperText("", 300);
+    cout << "Would you like to try a new sport? (Enter \"Y\" for Yes. Enter \"N\" for No)" << endl;
+    string answer;
+    getline(cin,answer);
+    answer == "Y" ? reRun = true : reRun = false;
+
+    if (answer == "N") {
+        cout << endl << "Thank you for using the..." << endl << endl;
+        sleeperText("   ____  _                                             _   _      ");
+  sleeperText("  / __ \\| |                                           | | (_)     ");
+  sleeperText(" | |  | | |_   _ _ __ ___  _ __   __ _ _ __ ___   __ _| |_ _  ___ ");
+  sleeperText(" | |  | | | | | | '_ ` _ \\| '_ \\ / _` | '_ ` _ \\ / _` | __| |/ __|");
+  sleeperText(" | |__| | | |_| | | | | | | |_) | (_| | | | | | | (_| | |_| | (__ ");
+  sleeperText("  \\____/|_|\\__, |_| |_| |_| .__/ \\__,_|_| |_| |_|\\__,_|\\__|_|\\___|");
+  sleeperText("            __/ |         | |                                     ");
+  sleeperText("           |___/          |_|                                     ");
+  sleeperText();
+    }
+}
+
+void ASCIIDisplay() {
+    int random = rand() % 3;
+    if (random == 0) {
+        sleeperText("           \\ /");
+        sleeperText("       |_O  X  O\\");
+        sleeperText("        /`-/ \\-'\\");
+        sleeperText("       | \\     / |");
+        sleeperText("      /   \\    |  \\");
+        sleeperText("",400);
+        sleeperText(".",100);
+        sleeperText(".",100);
+        sleeperText(".",100);
+        sleeperText("",100);
+    }
+        
+    else if (random == 1) {
+        sleeperText(" o   \\ o /  _ o         __|    \\ /     |__        o _  \\ o /   o");
+        sleeperText("/|\\    |     /\\   ___\\o  \\o    |    o/    o/__   /\\     |    /|\\");
+        sleeperText("/ \\   / \\   | \\  /)  |    ( \\  /o\\  / )    |  (\\  / |   / \\   / \\");
+        sleeperText("",400);
+        sleeperText(".",100);
+        sleeperText(".",100);
+        sleeperText(".",100);
+        sleeperText("",100);
+    }
+        
+    else {
+        sleeperText("            ___");
+        sleeperText("          /`  _\\");
+        sleeperText("          |  / 0|--.");
+        sleeperText("     -   / \\_|0`/ /.`'._/)");
+        sleeperText(" - ~ -^_| /-_~ ^- ~_` - -~ _");
+        sleeperText(" -  ~  -| |   - ~ -  ~  -");
+        sleeperText("        \\ \\, ~   -   ~");
+        sleeperText("         \\_|");
+        sleeperText("",400);
+        sleeperText(".",100);
+        sleeperText(".",100);
+        sleeperText(".",100);
+        sleeperText("",100);
+        
+    }
 }

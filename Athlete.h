@@ -40,6 +40,10 @@ class Athlete { // shell Athlete class
         int getHeight() { return height; }
         int getWeight() { return weight; }
 
+        // modifier functions
+        void setSport(string sport) {this->sport = sport;}
+
+        // overloading comparator
         bool operator== (Athlete& ath2) {
     return (this->id == ath2.id);
         }
