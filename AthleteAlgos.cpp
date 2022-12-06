@@ -25,6 +25,8 @@ void algo(HashSet &set, Athlete &user,
        iter != map[user.getSport()].end(); iter++) {
     auto ath = set.searchID(*iter);
     if (ath->getSex() == gender) {
+        // TESTING
+      //cout << ath->getName() << endl;
       // get age range
       if (ath->getAge() > maxAge) {
         maxAge = ath->getAge();
@@ -87,24 +89,26 @@ void algo(HashSet &set, Athlete &user,
   cout << "Overall Probability of Success: " << setprecision(3)<<probAvg*100 << "%" << endl;
   cout << endl;
   if (probAvg < 0.5) {
-    cout << "Better start setting up that LinkedIn and doing some leetcode. This probably won't work out for you..." << endl;
+    cout << "Better start setting up that LinkedIn and doing some leetcode. This probably won't work out for you..." << endl << endl;
   }
   else if (probAvg >= 0.5) {
-    cout << "Congratulations, you actually have a pretty good chance! Get to practicing!" << endl;
+    cout << "Congratulations, you actually have a pretty good chance! Get to practicing!" << endl << endl;
   }
     
 }
 
-void algo(BnRTree &tree, Athlete &user,
-          unordered_map<string, vector<string>> &map) {
+void algo(BnRTree &tree, Athlete &user, unordered_map<string, vector<string>> &map) {
   // use the user info and find athletes ids in the user's sport using the map
   // helper. Then search the ids in the hashset. Store the min and max vals for
   // gender, age, height, weight and if user vals in this range, we'll say they
   // can win a medal
   // if statement for gender (check before taking min and max things if gender
   // matches)
-/*
- string gender = user.getSex();
+  // helper. Then search the ids in the hashset. Store the min and max vals for
+  // gender, age, height, weight and if user vals in this range, we'll say they
+  // can win a medal if statement for gender (check before taking min and max
+  // things if gender matches)
+  string gender = user.getSex();
   int maxAge = 0;
   int minAge = 100;
   int maxHeight = 0;
@@ -118,8 +122,10 @@ void algo(BnRTree &tree, Athlete &user,
 
   for (auto iter = map[user.getSport()].begin();
        iter != map[user.getSport()].end(); iter++) {
-    // auto ath = tree.searchID(*iter); <-- add searchID function
+    auto ath = tree.searchID(*iter);
     if (ath->getSex() == gender) {
+      // TESTING
+      //cout << ath->getName() << endl;
       // get age range
       if (ath->getAge() > maxAge) {
         maxAge = ath->getAge();
@@ -164,6 +170,8 @@ void algo(BnRTree &tree, Athlete &user,
       (double)(user.getWeight() - avgWeight) / ((maxWeight - minWeight) / 4.0);
 
   double probAge;
+
+  //#Referenced https://stackoverflow.com/questions/58371163/how-to-change-the-z-value-to-the-one-from-the-table-z-table-from-normal-distrib
   zScoreAge < 0 ? probAge = 2 * (0.5 * erfc(-zScoreAge * M_SQRT1_2)) : probAge = 2 * (1 - 0.5 * erfc(-zScoreAge * M_SQRT1_2)); 
   double probHeight; 
   zScoreHeight < 0 ? probHeight = 2 * (0.5 * erfc(-zScoreHeight * M_SQRT1_2)) : probHeight = 2 * (1 - 0.5 * erfc(-zScoreHeight * M_SQRT1_2)); 
@@ -171,16 +179,19 @@ void algo(BnRTree &tree, Athlete &user,
   zScoreWeight < 0 ? probWeight = 2 * (0.5 * erfc(-zScoreWeight * M_SQRT1_2)) : probWeight = 2 * (1 - 0.5 * erfc(-zScoreWeight * M_SQRT1_2)); 
 
   double probAvg = (probAge + probHeight + probWeight) / 3;
-
-  cout << "Probabiliy Given Age: " << probAge << endl;
-  cout << "Probabiliy Given Height: " <<probHeight << endl;
-  cout << "Probabiliy Given Weight: " <<probWeight << endl;
-
-  cout << "Overall Probability of Success: " << probAvg << endl;
-
+  
+  cout << endl;
+  // cout << "Probabiliy Given Age: " << probAge << endl;
+  // cout << "Probabiliy Given Height: " <<probHeight << endl;
+  // cout << "Probabiliy Given Weight: " <<probWeight << endl;
+  // cout << endl;
+  cout << "Overall Probability of Success: " << setprecision(3)<<probAvg*100 << "%" << endl;
+  cout << endl;
   if (probAvg < 0.5) {
-    cout << "Better start setting up that LinkedIn and doing some leetcode. This probably won't work out for you..." << endl;
+    cout << "Better start setting up that LinkedIn and doing some leetcode. This probably won't work out for you..." << endl << endl;
   }
   else if (probAvg >= 0.5) {
-    cout << "Congratulations, you actually have a pretty good chance! Get to practicing!" << endl; */
+    cout << "Congratulations, you actually have a pretty good chance! Get to practicing!" << endl << endl;
+  }
+
 }

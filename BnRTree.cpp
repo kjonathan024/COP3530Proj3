@@ -5,35 +5,187 @@ BnRTree::TreeNode *BnRTree::getRoot() {
     return root;
 }
 
-//INSERT
-//INSERT
-void BnRTree::insert(int value, string id) {
-    cout << "insert" << endl;
-    root = helpInsert(root, value, id);
-    //root->red = false;
-    //balance(root);
-    print();
+//SEARCH ID
+Athlete *BnRTree::searchID(std::string ID) {
+    return helpSearch(root, stoi(ID));
 }
-BnRTree::TreeNode *BnRTree::helpInsert(BnRTree::TreeNode* head, int value, string id) {
+
+Athlete *BnRTree::helpSearch(BnRTree::TreeNode *head, int value) {
+    while (value != head->value){
+        if (value < head->value){
+            head = head->left;
+        }
+        else{
+            head = head->right;
+        }
+    }
+    return head->athlete;
+}
+
+
+//INSERT
+//INSERT
+void BnRTree::insert(Athlete* a) {
+    root = helpInsert(root, stoi(a->getID()), a);
+    //balance
+    balanceNodes();
+    root->red = false;
+}
+
+void BnRTree::balanceNodes() {
+    //nodesPassed starts from last inserted to root
+    unbalanced = nullptr;
+    for (int i = 0; i < nodesPassed.size(); ++i) {
+        TreeNode* head = nodesPassed.at(i);
+        //cout << "node: " << head->value << ", Color: " << head->red << endl;
+        //balance
+        if (unbalanced == nullptr){
+            //cout << "unbalanced is null " << endl;
+            if (head->parent == nullptr){//root, make it black
+                head->red = false;
+            }
+            else{
+                TreeNode* dad = head->parent;
+                if (dad->right == head){
+                    dad->right = rotate(head);
+                }
+                if (dad->left == head){
+                    dad->left = rotate(head);
+                }
+            }
+        }
+
+
+        //rotate unbalanced
+        if (unbalanced != nullptr && unbalanced == head){
+            //cout << "(rotating) unbalanced: "<< head->value << endl;
+            TreeNode* newChild = nullptr;
+            if (right1 & right2){//right, right
+                //cout << "left rotation" << endl;
+                newChild = rotateLeft(unbalanced);
+                if (head->parent == nullptr){
+                    root = newChild;
+                    newChild->parent = nullptr;
+                }
+                else {
+                    TreeNode* dad = head->parent;
+                    if (dad->right == head){
+                        dad->right = newChild;
+                    }
+                    if (dad->left == head){
+                        dad->left = newChild;
+                    }
+                    newChild->parent = dad;
+                }
+                //assign parents
+                if (newChild->left != nullptr){
+                    newChild->left->parent = newChild;
+                }
+                if (newChild->right != nullptr){
+                    newChild->right->parent = newChild;
+                }
+            }
+            else if (!right1 & right2){//left, right
+                //cout << "left right rotation" << endl;
+                newChild = rotateLeftRight(unbalanced);
+                if (head->parent == nullptr){
+                    root = newChild;
+                    newChild->parent = nullptr;
+                }
+                else{
+                    TreeNode* dad = head->parent;
+                    if (dad->right == head){
+                        dad->right = newChild;
+                    }
+                    if (dad->left == head){
+                        dad->left = newChild;
+                    }
+                    newChild->parent = dad;
+                }
+                //assign parents
+                if (newChild->left != nullptr){
+                    newChild->left->parent = newChild;
+                }
+                if (newChild->right != nullptr){
+                    newChild->right->parent = newChild;
+                }
+            }
+            else if(right1 & !right2){//right, left
+                //cout << "right left rotation" << endl;
+                newChild = rotateRightLeft(unbalanced);
+                if (head->parent == nullptr){
+                    root = newChild;
+                    newChild->parent = nullptr;
+                }
+                else{
+                    TreeNode* dad = head->parent;
+                    if (dad->right == head){
+                        dad->right = newChild;
+                    }
+                    if (dad->left == head){
+                        dad->left = newChild;
+                    }
+                    newChild->parent = dad;
+                }
+                //assign parents
+                if (newChild->left != nullptr){
+                    newChild->left->parent = newChild;
+                }
+                if (newChild->right != nullptr){
+                    newChild->right->parent = newChild;
+                }
+            }
+            else{//left, left
+                //cout << "right rotation" << endl;
+                newChild = rotateRight(unbalanced);
+                if (head->parent == nullptr){
+                    root = newChild;
+                    newChild->parent = nullptr;
+                }
+                else{
+                    TreeNode* dad = head->parent;
+                    if (dad->right == head){
+                        dad->right = newChild;
+                    }
+                    if (dad->left == head){
+                        dad->left = newChild;
+                    }
+                    newChild->parent = dad;
+                }
+                //assign parents
+                if (newChild->left != nullptr){
+                    newChild->left->parent = newChild;
+                }
+                if (newChild->right != nullptr){
+                    newChild->right->parent = newChild;
+                }
+            }
+            unbalanced = nullptr;
+            //after rotating, we have to modify the colors
+            //newChild at top turns black and the 2 children turn red
+            newChild->red = false;
+            newChild->right->red = true;
+            newChild->left->red = true;
+        }
+    }
+    nodesPassed.clear();
+}
+
+BnRTree::TreeNode *BnRTree::helpInsert(BnRTree::TreeNode* head, int value, Athlete* a) {
     //input root as head
     if (head == nullptr){
-        return new TreeNode(value, id);
-    }
-    if (value == head->value){
-        head->IDs.push_back(id);
-        return root;
+        return new TreeNode(a);
     }
     //for non-empty trees -> insert left or right
     if (value < head->value){
-        head->left = helpInsert(head->left, value, id);
+        head->left = helpInsert(head->left, value, a);
     }
     else{
-        head->right = helpInsert(head->right, value, id);
+        head->right = helpInsert(head->right, value, a);
     }
 
-    cout << "node: " << head->value << endl;
-
     //DO ALL THIS AFTER INSERTING
+
     //parent
     if (head->left != nullptr){
         head->left->parent = head;
@@ -42,48 +194,32 @@ BnRTree::TreeNode *BnRTree::helpInsert(BnRTree::TreeNode* head, int value, strin
         head->right->parent = head;
     }
 
-    //balance
-    if (head->parent == nullptr){//root, make it black
-        head->red = false;
-    }
-    else{
-        TreeNode* dad = head->parent;
-        if (dad->right == head){
-            //cout << "right" << endl;
-            dad->right = rotate(head);
-        }
-        if (dad->left == head){
-            //cout << "left" << endl;
-            dad->left = rotate(head);
+    //stack: starting from last/inserted node's parent and going up
+    //find last node
+    TreeNode* last = nullptr;
+    if (head->left != nullptr){
+        if (head->left->value == value){
+            last = head->left;
         }
     }
-    //rotate unbalanced
-    if (unbalanced != nullptr){
-        if (right1 & right2){//right, right
-            rotateLeft(unbalanced);
+    if (head->right != nullptr){
+        if (head->right->value == value){
+            last = head->right;
         }
-        else if (!right1 & right2){//left, right
-            rotateLeftRight(unbalanced);
-        }
-        else if(right1 & !right2){//right, left
-            rotateRightLeft(unbalanced);
-        }
-        else{//left, left
-            rotateRight(unbalanced);
-        }
-        unbalanced = nullptr;
     }
-
-    print();
+    //add to nodesPassed
+    if (last != nullptr){ //we are looking at last inserted node
+        nodesPassed.push_back(last);
+    }
+    nodesPassed.push_back(head);
 
     return head; //returns root bc stack goes down to first
 }
 
 //ROTATE
 BnRTree::TreeNode *BnRTree::rotate(BnRTree::TreeNode *head) {
-    cout << "hi" << endl;
     //Case 0: if parent black, just return the red node
-    if (head->parent->red == false || head->parent->parent == nullptr){
+    if ((head->parent->red == false) || head->parent->parent == nullptr || head->red == false){
         return head;
     }
     //find uncle
@@ -110,18 +246,17 @@ BnRTree::TreeNode *BnRTree::rotate(BnRTree::TreeNode *head) {
 
     //Case 1: if uncle red
     if (uncleRed == true){
-        cout << "uncle Red" << endl;
+        //cout << "uncle Red (change color)" << endl;
         TreeNode* grandfather = head->parent->parent;
         //grandfather turn red and the 2 children turn black
         grandfather->red = true;
         grandfather->right->red = false;
-        cout << grandfather->right->red << endl;
         grandfather->left->red = false;
         return head;
     }
     //Case 2: if uncle black
     else{
-        cout << "uncle Black" << endl;
+        //cout << "uncle Black (rotate later)" << endl;
         TreeNode* grandfather = head->parent->parent;
         TreeNode* dad = head->parent;
         if (grandfather->right == head->parent){
@@ -148,6 +283,9 @@ BnRTree::TreeNode *BnRTree::rotateRight(BnRTree::TreeNode *head) {
     TreeNode* grandchild = child->left;
     //head point child's left
     head->left = child -> right;
+    if (child->right != nullptr){
+        child->right->parent = head;
+    }
     //child point head right and grandchild left
     child -> right = head;
 
@@ -156,10 +294,14 @@ BnRTree::TreeNode *BnRTree::rotateRight(BnRTree::TreeNode *head) {
 
 BnRTree::TreeNode *BnRTree::rotateLeft(BnRTree::TreeNode *head) {
     //right child, then right grandchild
-    TreeNode* child = head ->right;
+    TreeNode* child = head->right;
     TreeNode* grandchild = child->right;
+
     //head point child's left
     head->right = child -> left;
+    if (child->left != nullptr){
+        child->left->parent = head;
+    }
     //child point head left and grandchild right
     child -> left = head;
 
@@ -195,34 +337,3 @@ BnRTree::TreeNode *BnRTree::rotateRightLeft(BnRTree::TreeNode *head) {
 
     return grandchild; //the new head
 }
-
-
-//PRINT
-void BnRTree::helpPrint(const std::string &prefix, TreeNode *node, bool isLeft) {
-    if( node != nullptr ){
-        std::cout << prefix;
-
-        std::cout << (isLeft ? "├──" : "└──" );
-
-        // print the value of the node
-        string color;
-        if (node->red){
-            color = "R";
-        }
-        else{
-            color = "B";
-        }
-        std::cout << node->value << " " << color << std::endl;
-
-        // enter the next tree level - left and right branch
-        helpPrint( prefix + (isLeft ? "│   " : "    "), node->left, true);
-        helpPrint( prefix + (isLeft ? "│   " : "    "), node->right, false);
-    }
-}
-
-void BnRTree::print(){
-    helpPrint("", root, false);
-}
-
-
-

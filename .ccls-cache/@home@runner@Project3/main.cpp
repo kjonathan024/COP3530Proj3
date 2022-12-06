@@ -22,7 +22,7 @@ void sleeperText(string s = "", int time = 50);
 
 Athlete welcomeMessage();
 
-void GetDataTSVFile(string fileP, HashSet &athletes,
+void GetDataTSVFile(string fileP, HashSet &athletes, BnRTree &tree,
                     unordered_map<string, vector<string>> &sport_to_id) {
   ifstream file(fileP);
   if (file.is_open()) {
@@ -68,18 +68,22 @@ void GetDataTSVFile(string fileP, HashSet &athletes,
 
       Athlete athlete(id, playerName, sex, age, height, weight, sport, event,
                       medalType);
+      Athlete *a = new Athlete(id, playerName, sex, age, height, weight, sport, event, medalType);
 
       athletes.add(athlete);
+      tree.insert(a);
       sport_to_id[sport].push_back(id);
     }
   }
 }
+
 int main() {
   Athlete user = welcomeMessage();
   HashSet athletes;
+  BnRTree tree;
   unordered_map<string, vector<string>> sport_to_id;
 /* read in TSV */
-  GetDataTSVFile("athlete_events_filtered.tsv", athletes, sport_to_id);
+  GetDataTSVFile("athlete_events_filtered.tsv", athletes, tree, sport_to_id);
 /* run hashset version of algo and time it */
 chrono::steady_clock::time_point begin = chrono::steady_clock::now();
   algo(athletes,user,sport_to_id);
@@ -87,6 +91,13 @@ chrono::steady_clock::time_point begin = chrono::steady_clock::now();
 
 cout << "Time for hashmap probability calculation: "
 << chrono::duration_cast<chrono::microseconds>(end - begin).count() << "[μs]" << endl;
+
+        begin = chrono::steady_clock::now();
+        algo(tree,user,sport_to_id);
+        end = chrono::steady_clock::now();
+
+   cout << "Time for Red-Black Tree probability calculation: "
+<< chrono::duration_cast<chrono::microseconds>(end - begin).count() << "[μs]" << endl; 
 }
 
 Athlete welcomeMessage() {
@@ -138,6 +149,7 @@ Athlete welcomeMessage() {
   weight = stoi(temp);
     
   cout << "What sport are you interested in? (Type exactly as seen)";
+  cout << endl;
     
   sleeperText("Alpine Skiing           Cycling             Luge                          Speed Skating",100);
   sleeperText("Archery                 Diving              Modern Pentathlon             Swimming",100);
