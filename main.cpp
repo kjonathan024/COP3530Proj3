@@ -183,7 +183,8 @@ string sportSelect() {
 
 void algoOperation(HashSet &athletes,BnRTree &tree, Athlete &user, unordered_map<string, vector<string>> &sport_to_id, bool &reRun)
 {
-    cout << endl << "Hashmap Implementation of Algorithm: " << endl;
+  cout << endl << "-----------------------------------------" << endl;
+    cout << endl << "Hashset Implementation of Algorithm: " << endl;
 chrono::steady_clock::time_point begin = chrono::steady_clock::now();
   algo(athletes,user,sport_to_id);
     chrono::steady_clock::time_point end = chrono::steady_clock::now();
@@ -191,10 +192,10 @@ chrono::steady_clock::time_point begin = chrono::steady_clock::now();
     sleeperText(".",300);
     sleeperText(".",300);
     sleeperText("", 300);
-cout << "Time for hashmap probability calculation: "
+cout << "Time for hashset probability calculation: "
 << chrono::duration_cast<chrono::microseconds>(end - begin).count() << "[μs]" << endl;
 sleeperText("",1000);
-
+cout << "-----------------------------------------" << endl;
 /* run red-black tree version of algo and time it */
 cout << endl << "Red-Black Tree Implementation of Algorithm: " << endl;
     
@@ -212,6 +213,7 @@ cout << endl << "Red-Black Tree Implementation of Algorithm: " << endl;
     sleeperText(".",300);
     sleeperText(".",300);
     sleeperText("", 300);
+  cout << "-----------------------------------------" << endl << endl;
     cout << "Would you like to try a new sport? (Enter \"Y\" for Yes. Enter \"N\" for No)" << endl;
     string answer;
     getline(cin,answer);
@@ -248,7 +250,7 @@ void ASCIIDisplay() {
         
     else if (random == 1) {
         sleeperText(" o   \\ o /  _ o         __|    \\ /     |__        o _  \\ o /   o");
-        sleeperText("/|\\    |     /\\   ___\\o  \\o    |    o/    o/__   /\\     |    /|\\");
+        sleeperText("/|\\    |     /\\   ___\\o  \\o     |    o/    o/__   /\\     |    /|\\");
         sleeperText("/ \\   / \\   | \\  /)  |    ( \\  /o\\  / )    |  (\\  / |   / \\   / \\");
         sleeperText("",400);
         sleeperText(".",100);
