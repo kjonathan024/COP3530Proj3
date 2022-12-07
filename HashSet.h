@@ -70,7 +70,7 @@ public:
     return set[h].end();
   }
 
-   forward_list<Athlete>::iterator searchID(string id) { 
+   forward_list<Athlete>::iterator searchID(string id) { // returns iterator to location of athlete (by search id)
     int h = hash(id);
     for (auto iter = set[h].begin(); iter != set[h].end(); iter++)
         {

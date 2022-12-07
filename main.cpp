@@ -10,13 +10,6 @@
 #include <thread>
 using namespace std;
 
-/*
-
-Use STL helper maps in addition to the self-made algorithms to speed up
-searching for specific characteristics in the hashset and red black tree. Ex:
-sport map that has sport as key and id as value
-
-*/
 void sleeperText(string s = "", int time = 50);
 
 string sportSelect();
@@ -26,16 +19,14 @@ void ASCIIDisplay();
 Athlete welcomeMessage();
 
 void algoOperation(HashSet &athletes,BnRTree &tree, Athlete &user, unordered_map<string, vector<string>> &sport_to_id, bool &reRun);
-
+//read in TSV data and stores the athlete objects created in a hashset and red and back tree
 void GetDataTSVFile(string fileP, HashSet &athletes, BnRTree &tree,
                     unordered_map<string, vector<string>> &sport_to_id) {
   ifstream file(fileP);
   if (file.is_open()) {
-    // get rid of the title line from 3file
-    // essentially read and then ignore.
     string line;
-    getline(file, line);
-    //cout << line << endl;
+    getline(file, line); // get rid of column name line
+      
     while (getline(file, line)) {
       // create stream from line of data
       istringstream stream(line);
@@ -70,11 +61,11 @@ void GetDataTSVFile(string fileP, HashSet &athletes, BnRTree &tree,
       getline(stream, sport, '\t');
       getline(stream, event, '\t');
       getline(stream, medalType, '\t');
-
+      //create athlete object with info from file
       Athlete athlete(id, playerName, sex, age, height, weight, sport, event,
                       medalType);
       Athlete *a = new Athlete(id, playerName, sex, age, height, weight, sport, event, medalType);
-
+      //add to data structures
       athletes.add(athlete);
       tree.insert(a);
       sport_to_id[sport].push_back(id);
@@ -83,7 +74,7 @@ void GetDataTSVFile(string fileP, HashSet &athletes, BnRTree &tree,
 }
 
 int main() {
-  Athlete user = welcomeMessage();
+  Athlete user = welcomeMessage(); //make athlete object from user information
   HashSet athletes;
   BnRTree tree;
   unordered_map<string, vector<string>> sport_to_id;
@@ -93,7 +84,7 @@ int main() {
 bool reRun = false;
 algoOperation(athletes,tree, user, sport_to_id, reRun);
 
-while (reRun) {
+while (reRun) { // allows user to rerun with different sports until they choose not to.
     ASCIIDisplay();
     user.setSport(sportSelect());
     algoOperation(athletes,tree, user, sport_to_id, reRun);
@@ -101,7 +92,7 @@ while (reRun) {
     
 }
 
-Athlete welcomeMessage() {
+Athlete welcomeMessage() { // welcome message and taking in general user characteristics via command line and returns Athlete object
   sleeperText("   ____  _                                             _   _      ");
   sleeperText("  / __ \\| |                                           | | (_)     ");
   sleeperText(" | |  | | |_   _ _ __ ___  _ __   __ _ _ __ ___   __ _| |_ _  ___ ");
@@ -152,12 +143,13 @@ Athlete welcomeMessage() {
   return Athlete("", name, gender, age, height, weight, sport, "", "");
 }
 
-void sleeperText(string s, int time) {
+void sleeperText(string s, int time) { // allows us to add delay to cout commands so we can stagger outputs for UX purposes
         cout << s << endl;
     std::this_thread::sleep_for(std::chrono::milliseconds(time));
 }
 
 string sportSelect() {
+  /* displays all sport options and takes in user's choice, returning it as a string */
   cout << "What sport are you interested in? (Type exactly as seen)";
   cout << endl;
     
@@ -183,6 +175,7 @@ string sportSelect() {
 
 void algoOperation(HashSet &athletes,BnRTree &tree, Athlete &user, unordered_map<string, vector<string>> &sport_to_id, bool &reRun)
 {
+/* The running function for our algorithms, abstracted so we could run the algorithms multiple times without having to relaunch the whole program */
   cout << endl << "-----------------------------------------" << endl;
     cout << endl << "Hashset Implementation of Algorithm: " << endl;
 chrono::steady_clock::time_point begin = chrono::steady_clock::now();
@@ -233,7 +226,7 @@ cout << endl << "Red-Black Tree Implementation of Algorithm: " << endl;
     }
 }
 
-void ASCIIDisplay() {
+void ASCIIDisplay() { // randomly displays one of three ASCII arts
     int random = rand() % 3;
     if (random == 0) {
         sleeperText("           \\ /");

@@ -10,13 +10,6 @@
 #include <thread>
 using namespace std;
 
-/*
-
-Use STL helper maps in addition to the self-made algorithms to speed up
-searching for specific characteristics in the hashset and red black tree. Ex:
-sport map that has sport as key and id as value
-
-*/
 void sleeperText(string s = "", int time = 50);
 
 string sportSelect();
@@ -26,16 +19,14 @@ void ASCIIDisplay();
 Athlete welcomeMessage();
 
 void algoOperation(HashSet &athletes,BnRTree &tree, Athlete &user, unordered_map<string, vector<string>> &sport_to_id, bool &reRun);
-
+//read in TSV data and stores t
 void GetDataTSVFile(string fileP, HashSet &athletes, BnRTree &tree,
                     unordered_map<string, vector<string>> &sport_to_id) {
   ifstream file(fileP);
   if (file.is_open()) {
-    // get rid of the title line from 3file
-    // essentially read and then ignore.
     string line;
-    getline(file, line);
-    //cout << line << endl;
+    getline(file, line); // get rid of column name line
+      
     while (getline(file, line)) {
       // create stream from line of data
       istringstream stream(line);
@@ -83,7 +74,7 @@ void GetDataTSVFile(string fileP, HashSet &athletes, BnRTree &tree,
 }
 
 int main() {
-  Athlete user = welcomeMessage();
+  Athlete user = welcomeMessage(); //make athlete object from user 
   HashSet athletes;
   BnRTree tree;
   unordered_map<string, vector<string>> sport_to_id;
@@ -183,6 +174,7 @@ string sportSelect() {
 
 void algoOperation(HashSet &athletes,BnRTree &tree, Athlete &user, unordered_map<string, vector<string>> &sport_to_id, bool &reRun)
 {
+/* The running function for our algorithms*/
   cout << endl << "-----------------------------------------" << endl;
     cout << endl << "Hashset Implementation of Algorithm: " << endl;
 chrono::steady_clock::time_point begin = chrono::steady_clock::now();
@@ -233,7 +225,7 @@ cout << endl << "Red-Black Tree Implementation of Algorithm: " << endl;
     }
 }
 
-void ASCIIDisplay() {
+void ASCIIDisplay() { // randomly displays one of three ASCII arts
     int random = rand() % 3;
     if (random == 0) {
         sleeperText("           \\ /");
